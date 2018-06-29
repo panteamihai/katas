@@ -1,4 +1,4 @@
-﻿namespace katas
+﻿namespace SimpleKatas
 {
     class Program
     {

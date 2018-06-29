@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C0F166CD-EE9C-44E7-89D5-569C0A55E199}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>katas</RootNamespace>
-    <AssemblyName>katas</AssemblyName>
+    <RootNamespace>SimpleKatas</RootNamespace>
+    <AssemblyName>simple-katas</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AVeryBigSum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
