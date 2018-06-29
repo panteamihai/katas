@@ -1,37 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 
 namespace SimpleKatas
 {
     //https://www.hackerrank.com/challenges/a-very-big-sum/problem
     public class AVeryBigSum
     {
-        private static IEnumerable<TestCaseData> PowersTestCases
-        {
-            get
-            {
-                yield return new TestCaseData(0, new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
-                yield return new TestCaseData(1, new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
-                yield return new TestCaseData(10, new[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 });
-                yield return new TestCaseData(103, new[] { 0, 0, 0, 0, 0, 0, 0, 1, 0, 3 });
-                yield return new TestCaseData(5346, new[] { 0, 0, 0, 0, 0, 0, 5, 3, 4, 6 });
-            }
-        }
-
-        [TestCaseSource(nameof(PowersTestCases))]
-        public void SplitTest(long number, int[] powers)
-        {
-            Assert.AreEqual(powers, TurnToPowersOfTen(number));
-        }
-
-        [TestCaseSource(nameof(PowersTestCases))]
-        public void MergeTest(long number, int[] powers)
-        {
-            Assert.AreEqual(number, GetNumberBase10(powers));
-        }
-
-        private static int[] TurnToPowersOfTen(long number)
+        public static int[] TurnToPowersOfTen(long number)
         {
             var powers = new int[10];
             var i = 0;
@@ -45,12 +21,12 @@ namespace SimpleKatas
             return powers.Reverse().ToArray();
         }
 
-        private static long GetNumberBase10(IEnumerable<int> powers)
+        public static long GetNumberBase10(IEnumerable<int> powers)
         {
             return powers.Aggregate<int, long>(0, (acc, p) => acc * 10 + p);
         }
 
-        private static long AVeryBigSum2(long[] ar)
+        public static long Act(long[] ar)
         {
             return GetNumberBase10(ar.Select(TurnToPowersOfTen).Aggregate(new int[11], (accumulator, currentNumberPowers) => {
                 var carryOver = 0;
@@ -67,6 +43,33 @@ namespace SimpleKatas
 
                 return accumulator;
             }));
+        }
+    }
+
+    public class AVeryBigSumTests
+    {
+        private static IEnumerable<TestCaseData> PowersTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(0, new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+                yield return new TestCaseData(1, new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 });
+                yield return new TestCaseData(10, new[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 });
+                yield return new TestCaseData(103, new[] { 0, 0, 0, 0, 0, 0, 0, 1, 0, 3 });
+                yield return new TestCaseData(5346, new[] { 0, 0, 0, 0, 0, 0, 5, 3, 4, 6 });
+            }
+        }
+
+        [TestCaseSource(nameof(PowersTestCases))]
+        public void SplitTest(long number, int[] powers)
+        {
+            Assert.AreEqual(powers, AVeryBigSum.TurnToPowersOfTen(number));
+        }
+
+        [TestCaseSource(nameof(PowersTestCases))]
+        public void MergeTest(long number, int[] powers)
+        {
+            Assert.AreEqual(number, AVeryBigSum.GetNumberBase10(powers));
         }
     }
 }
